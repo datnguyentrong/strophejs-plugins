@@ -63,17 +63,17 @@ Strophe.ArchivedCollection.prototype = {
       var timestamp = this.startDate;
       var msgTimestamp;
       var chat = stanza.getElementsByTagName('chat')[0];
-      var metadata = stanza.getElementsByTagName('metadata')[0];
       var element = chat.firstChild;
+
       while (element) {
         switch (element.tagName) {
         case 'to':
           msgTimestamp = this._incrementTimestampForMessage(timestamp, element);
-          messages.push(new Strophe.ArchivedMessage(msgTimestamp, myJid, this.jid, metadata, Strophe.getText(element.getElementsByTagName('body')[0])));
+          messages.push(new Strophe.ArchivedMessage(msgTimestamp, myJid, this.jid, element.getElementsByTagName('metadata')[0], Strophe.getText(element.getElementsByTagName('body')[0])));
           break;
         case 'from':
           msgTimestamp = this._incrementTimestampForMessage(timestamp, element);
-          messages.push(new Strophe.ArchivedMessage(msgTimestamp, this.jid, myJid, metadata, Strophe.getText(element.getElementsByTagName('body')[0])));
+          messages.push(new Strophe.ArchivedMessage(msgTimestamp, this.jid, myJid, element.getElementsByTagName('metadata')[0], Strophe.getText(element.getElementsByTagName('body')[0])));
           break;
         case 'set':
           responseRsm = new Strophe.RSM({xml: element});
@@ -108,7 +108,6 @@ Strophe.ArchivedMessage = function(timestamp, from, to, metadata, body) {
   this.metadata.useridFrom = metadata.getAttribute('useridFrom');
   this.metadata.useridTo = metadata.getAttribute('useridTo');
   this.metadata.timestamp = metadata.getAttribute('timestamp');
-
 };
 
 Strophe.ArchivedMessage.prototype = {
