@@ -8,8 +8,8 @@ Strophe.addConnectionPlugin('archive', {
     Strophe.addNamespace('ARCHIVE', 'urn:xmpp:archive');
   },
 
-  listCollections: function(jid, rsm, callback) {
-    var xml = $iq({type: 'get', id: this._connection.getUniqueId('list')}).c('list', {xmlns: Strophe.NS.ARCHIVE, 'with': jid});
+  listCollections: function(jid, rsm, fromDate, callback) {
+    var xml = $iq({type: 'get', id: this._connection.getUniqueId('list')}).c('list', {xmlns: Strophe.NS.ARCHIVE, 'with': jid, 'from':fromDate});
     if (rsm) { xml = xml.cnode(rsm.toXML()); }
     this._connection.sendIQ(xml, this._handleListConnectionResponse.bind(this, callback));
   },
