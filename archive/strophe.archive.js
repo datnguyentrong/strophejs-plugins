@@ -101,8 +101,8 @@ Strophe.ArchivedMessage = function(timestamp, from, to, metadata, body) {
   this.to = to;
   this.body = body;
   this.metadata = {};
-  this.metadata.useravatarFrom = metadata.getAttribute('useravatarFrom');
-  this.metadata.useravatarTo = metadata.getAttribute('useravatarTo');
+
+  this.metadata.jidFrom = metadata.getAttribute('jidFrom');
   this.metadata.usernameFrom = metadata.getAttribute('usernameFrom');
   this.metadata.usernameTo = metadata.getAttribute('usernameTo');
   this.metadata.timestamp = metadata.getAttribute('timestamp');
